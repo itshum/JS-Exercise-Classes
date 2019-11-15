@@ -129,7 +129,7 @@ class Lambdasian {
   }
 // good rule of thumb -- align your brackets at start of constructor //
 
-  speak(){
+  speak(){ //the .dot is there to clarify in instructions that you know how to use it that it is a method but it's not needed as its any other function, and you don't need the dot. 
     return `Hello my name is ${this.name}, I am from ${this.location}`;
   }
 }
@@ -142,26 +142,31 @@ class Lambdasian {
         + `specialty`: what the instance of Instructor is good at, i.e. 'redux'
         + `favLanguage`: i.e. 'JavaScript, Python, Elm etc.'
         + `catchPhrase`: i.e. `Don't forget the homies`.
-    - The constructor calls the parent constructor passing it what it needs.
+    - The constructor calls the parent constructor passing it what it needs. // ln 153, fill out parent first, come back down to instructor via super(attributes) 
     - The constructor should also initialize `specialty`, `favLanguage` and `catchPhrase` properties on the instance.
     - Instructor instances have the following methods:
-        + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
+        + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in. // new argument unrelated to anything in object we see right now. Parameter equals to subject. 
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 class Instructor extends Lambdasian {
-  constructor(attributes){
-    super(attributes)
-    this.specialty = attributes.specialty
-    this.favLanguage = attributes.favLanguage
+  constructor(attributes){ // name here doesn't matter, just be consistent. It's an object, name it whatever. 
+    super(attributes);
+    this.specialty = attributes.specialty,
+    this.favLanguage = attributes.favLanguage,
     this.catchPhrase = attributes.catchPhrase
-
+  }
+  
+  demo(studentSubject){ //parameter is a placeholder, name doesn't matter. 
+    return `Today we are learning about ${studentSubject}`; 
   }
 
-
+  grade(student, subject){  // two arguments here
+    return `${student.name} receives a perfect score on ${subject}` // subject by itself is there without . because its a string, single value, look at instructions for clues. 
+    // Alvin receives a perfect score on history 
+    
+  }
 
 }
-
-
 
 
 /*
@@ -179,7 +184,26 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian{
+  
+  constructor(object){
+    super(object);
+    this.previousBackground = object.previousBackground,
+    this.className = object.className,
+    this.favSubjects = object.favSubjects
+  }
+  
+  listSubjects(favSubjects){ //adding own method
+    return `Loving ${this.favSubjects.toString()}`; 
+  }
+
+  PRAssignment(subject){ // `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
+    return `${this.name} has submitted for PR for ${subject}`;
+  }
+
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
 
 }
 
@@ -196,7 +220,24 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+
+class ProjectManager extends Instructor {
+
+  constructor(object){
+    super(object);
+    this.gradClassName = object.gradClassName,
+    this.favInstructor = object.favInstructor
+  }
+
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+
+  debugsCode(student, subject){ //two arguments here
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+    // return `${student.name} receives a perfect score on ${subject}`
+  }
+
 
 }
 
